@@ -1,7 +1,7 @@
 import React from "react";
-import a from "./app.scss";
+import a from "../../shared/app.scss";
 import styles from "./hero.scss";
-import u from "./utils.scss";
+import u from "../../shared/utils.scss";
 
 export const Hero = props => (
   <div className={styles.cItem}>

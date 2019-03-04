@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import styles from "./app.scss";
+import styles from "../../shared/app.scss";
 import s from "./search.scss";
-import u from "./utils.scss";
 
 export class Search extends Component {
   constructor(props) {
@@ -18,13 +17,17 @@ export class Search extends Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <label className={styles.oLabel} htmlFor="nameStartWith">
-              Pers by name&nbsp;
+              <span role="img" aria-label="search">
+                🔍
+              </span>{" "}
+              by name&nbsp;
               <input
                 onChange={onNameChange}
                 id="nameStartWith"
                 type="text"
                 value={name}
-                className={styles.oInput}
+                className={styles.oInput + " " + s.cSearch__input}
+                placeholder="type and submit"
               />
               <button
                 className={`${styles.cBtn} ${s.cSearch__submit}`}
@@ -34,7 +37,7 @@ export class Search extends Component {
               </button>
             </label>
             <span className={s.cSearch__small}>
-              <i>{total}</i> pers in the base
+              and explore <i>{total}</i> pers in the base
             </span>
           </form>
         </div>

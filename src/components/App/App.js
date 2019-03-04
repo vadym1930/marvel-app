@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 import axios from "axios";
-import { FooterContent } from "./FooterContent";
-import { Search } from "./Search";
+import { FooterContent } from "../FooterContent/FooterContent";
+import { Search } from "../Search/Search";
 import "normalize.css";
-import { Pagination } from "./Pagination";
-import { Hero } from "./Hero";
-import styles from "./app.scss";
-import u from "./utils.scss";
+import { Pagination } from "../Pagination/Pagination";
+import { Hero } from "../Hero/Hero";
+import styles from "../../shared/app.scss";
+import u from "../../shared/utils.scss";
 
 const PARAM_NAME_STARTS_WITH = "nameStartsWith=";
 const PARAM_API_KEY = "apikey=";
@@ -218,7 +218,7 @@ class App extends Component {
       if (total <= list.length) {
         btnCssClasses.push(u.isDisabled);
       } else {
-        btnCssClasses.push(u.isActive);
+        btnCssClasses.push(u.isBlack);
       }
       // handle scenarion when going throught pages.
     } else {
@@ -253,7 +253,7 @@ class App extends Component {
                 {/* {isEmpty && isSearchTermChangedBeforeSubmit ? "Nothing" : ""} */}
               </div>
               {searchTerm ? (
-                <div className="c-more c-main__more">
+                <div className={styles.cMain__more}>
                   <button
                     className={btnCssClasses.join(" ")}
                     onClick={() =>

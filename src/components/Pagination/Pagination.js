@@ -1,7 +1,7 @@
 import React from "react";
 import { PaginationButton } from "./PaginationButton";
 import styles from "./pagination.scss";
-import u from "./utils.scss";
+import u from "../../shared/utils.scss";
 
 export const Pagination = props => {
   let pages = [];
@@ -25,13 +25,6 @@ export const Pagination = props => {
   }
   return (
     <div>
-      <p>
-        Unique UI pattern — mega pager.
-        <span role="img" aria-label="joke">
-          🤪
-        </span>
-        &nbsp;Cached pages marked as blue
-      </p>
       <div className={styles.cPagination__inner}>{pages}</div>
     </div>
   );
