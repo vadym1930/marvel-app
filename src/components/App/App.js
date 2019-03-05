@@ -32,7 +32,7 @@ class App extends Component {
           pages: null
         }
       },
-      limit: 5,
+      limit: 8,
       searchTerm: "",
       askedPage: 0,
       pers: {},

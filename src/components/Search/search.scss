@@ -1,13 +1,44 @@
 @import '../../shared/app.scss';
 
 .cSearch {
-  &__form {}
+  font-weight: normal;
 
-  &__input {}
+  &__field {
+    +.cSearch__field {
+      margin-top: 15px;
+
+      @media (min-width: 670px) {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+  }
+
+  &__inner {
+    @media (min-width: 670px) {
+
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+
+  &__text {
+    display: block;
+  }
+
+  &__label {}
 
   &__submit {
     color: #fff;
     background-color: #000;
+    width: 100%;
+
+    &:hover {
+      background-color: $primaryColor;
+    }
   }
 
   &__small {

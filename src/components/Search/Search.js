@@ -16,29 +16,44 @@ export class Search extends Component {
       <div>
         <div>
           <form onSubmit={this.handleSubmit}>
-            <label className={styles.oLabel} htmlFor="nameStartWith">
-              <span role="img" aria-label="search">
-                🔍
-              </span>{" "}
-              by name&nbsp;
-              <input
-                onChange={onNameChange}
-                id="nameStartWith"
-                type="text"
-                value={name}
-                className={styles.oInput + " " + s.cSearch__input}
-                placeholder="type and submit"
-              />
-              <button
-                className={`${styles.cBtn} ${s.cSearch__submit}`}
-                type="submit"
+            <div className={s.cSearch__inner}>
+              <label
+                className={styles.oLabel + " " + s.cSearch__field}
+                htmlFor="nameStartWith"
               >
-                go
-              </button>
-            </label>
-            <span className={s.cSearch__small}>
-              and explore <i>{total}</i> pers in the base
-            </span>
+                <div className={s.cSearch__field}>
+                  <span className={s.cSearch__text}>
+                    <span role="img" aria-label="search">
+                      🔍
+                    </span>{" "}
+                    by name&nbsp;&nbsp;
+                  </span>
+                </div>
+              </label>
+              <div className={s.cSearch__field}>
+                <input
+                  onChange={onNameChange}
+                  id="nameStartWith"
+                  type="text"
+                  value={name}
+                  className={styles.oInput + " " + s.cSearch__input}
+                  placeholder="type and submit"
+                />
+              </div>
+              <div className={s.cSearch__field}>
+                <button
+                  className={`${styles.cBtn} ${s.cSearch__submit}`}
+                  type="submit"
+                >
+                  go
+                </button>
+              </div>
+              <div className={s.cSearch__field}>
+                <span className={s.cSearch__small}>
+                  &nbsp;and explore <i>{total}</i> characters
+                </span>
+              </div>
+            </div>
           </form>
         </div>
       </div>
