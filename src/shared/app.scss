@@ -107,6 +107,7 @@
     min-height: inherit;
     font-size: 0;
   }
+
   .cApp__header & {
 
     @media (min-width: 1280px) {
@@ -144,6 +145,7 @@
   font-size: 20px;
   position: relative;
   overflow: hidden;
+  display: block;
 
   &__delimiter {
     content: "";
