@@ -4,12 +4,27 @@
   font-weight: normal;
 
   &__field {
+    @media (min-width: 670px) {
+      margin-bottom: 10px;
+
+      &:last-child {
+        padding-left: 50px;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      margin-bottom: 0;
+
+      &:last-child {
+        margin-left: auto;
+      }
+    }
+
     +.cSearch__field {
       margin-top: 15px;
 
       @media (min-width: 670px) {
         margin-top: 0;
-        margin-bottom: 10px;
       }
     }
 
@@ -43,6 +58,7 @@
 
   &__small {
     font-size: 20px;
+    color: rgba(#fff, .7);
 
     i {
       min-width: 30px;

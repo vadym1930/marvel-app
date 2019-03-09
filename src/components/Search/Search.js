@@ -21,25 +21,16 @@ export class Search extends Component {
                 className={styles.oLabel + " " + s.cSearch__field}
                 htmlFor="nameStartWith"
               >
-                <div className={s.cSearch__field}>
-                  <span className={s.cSearch__text}>
-                    <span role="img" aria-label="search">
-                      🔍
-                    </span>{" "}
-                    by name&nbsp;&nbsp;
-                  </span>
-                </div>
-              </label>
-              <div className={s.cSearch__field}>
                 <input
                   onChange={onNameChange}
                   id="nameStartWith"
                   type="text"
                   value={name}
                   className={styles.oInput + " " + s.cSearch__input}
-                  placeholder="type and submit"
+                  placeholder="type start the name with and submit"
                 />
-              </div>
+                <span className={styles.oLabel__delimiter} />
+              </label>
               <div className={s.cSearch__field}>
                 <button
                   className={`${styles.cBtn} ${s.cSearch__submit}`}
@@ -50,7 +41,8 @@ export class Search extends Component {
               </div>
               <div className={s.cSearch__field}>
                 <span className={s.cSearch__small}>
-                  &nbsp;and explore <i>{total}</i> characters
+                  &nbsp;...&nbsp;explore <i>{total ? total : "0000"}</i>{" "}
+                  characters
                 </span>
               </div>
             </div>

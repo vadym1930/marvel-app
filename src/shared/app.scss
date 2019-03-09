@@ -37,11 +37,22 @@
   &__inner {
     display: flex;
     flex-wrap: wrap;
+
+    @media (min-width: 1280px) {
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+    }
   }
 
   &__pagination {
     padding-top: 50px;
     padding-bottom: 50px;
+
+    @media (min-width: 1280px) {
+      flex-basis: 30%;
+      max-width: 30%;
+    }
   }
 
   &__results {
@@ -52,23 +63,41 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    margin-left: -5px;
     margin-right: -5px;
+
+    @media (min-width: 1280px) {
+      flex-basis: 70%;
+      max-width: 70%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
   }
 
   &__more {
     position: sticky;
     top: 122px;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    @media (min-width: 1280px) {
+      margin-top: 5px;
+    }
   }
 }
 
 .cBtn {
-  min-height: $form-elements-height;
+  min-height: 50px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: none;
-  min-width: 100px;
+  min-width: 150px;
   padding-left: $space;
   padding-right: $space;
   cursor: pointer;
@@ -78,23 +107,66 @@
     min-height: inherit;
     font-size: 0;
   }
+  .cApp__header & {
+
+    @media (min-width: 1280px) {
+      min-width: 70px;
+    }
+  }
 }
 
 .oInput {
-  min-height: $form-elements-height;
+  min-height: 50px;
   padding-left: $space;
   padding-right: $space;
   font-size: 1.2rem;
   border: none;
+  background-color: transparent;
+  color: #fff;
+  min-width: 300px;
+
+  &:focus {
+    outline: none;
+
+    +.oLabel__delimiter {
+      transform: translateX(0);
+    }
+  }
+
+  &::placeholder {
+    color: rgba(#fff, .7);
+  }
+
+
 }
 
 .oLabel {
   font-size: 20px;
+  position: relative;
+  overflow: hidden;
+
+  &__delimiter {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 5px;
+    background-color: #fff;
+    height: 100%;
+    left: 0;
+    top: 0;
+    transition: transform .3s ease-in-out;
+    transform: translateX(-4px);
+  }
 }
 
 .oContainer {
   padding-left: $space;
   padding-right: $space;
+
+  @media (min-width: 1280px) {
+    padding-left: $space-desktop;
+    padding-right: $space-desktop;
+  }
 }
 
 .is-active {
@@ -111,33 +183,4 @@
   opacity: 0.5;
   pointer-events: none;
   border: none;
-}
-
-@media (min-width: 1280px) {
-  .oContainer {
-    padding-left: $space-desktop;
-    padding-right: $space-desktop;
-  }
-
-  .cMain {
-    &__inner {
-      justify-content: space-between;
-      flex-wrap: nowrap;
-      align-items: flex-start;
-    }
-
-    &__results {
-      flex-basis: 70%;
-      max-width: 70%;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    &__pagination {
-      flex-basis: 30%;
-      max-width: 30%;
-    }
-  }
 }
