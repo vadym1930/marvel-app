@@ -1,4 +1,12 @@
-@import "./constants.scss";
+@import './constants.scss';
+
+.cError {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .cApp {
   color: #282828;
@@ -103,13 +111,12 @@
   cursor: pointer;
 
   &:after {
-    content: "";
+    content: '';
     min-height: inherit;
     font-size: 0;
   }
 
   .cApp__header & {
-
     @media (min-width: 1280px) {
       min-width: 70px;
     }
@@ -129,16 +136,14 @@
   &:focus {
     outline: none;
 
-    +.oLabel__delimiter {
+    + .oLabel__delimiter {
       transform: translateX(0);
     }
   }
 
   &::placeholder {
-    color: rgba(#fff, .7);
+    color: rgba(#fff, 0.7);
   }
-
-
 }
 
 .oLabel {
@@ -148,7 +153,7 @@
   display: block;
 
   &__delimiter {
-    content: "";
+    content: '';
     position: absolute;
     display: block;
     width: 5px;
@@ -156,7 +161,7 @@
     height: 100%;
     left: 0;
     top: 0;
-    transition: transform .3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
     transform: translateX(-4px);
   }
 }

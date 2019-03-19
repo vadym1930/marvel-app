@@ -39,7 +39,8 @@ class App extends Component {
       askedPage: 0,
       pers: {},
       // that help hide previouse result status — button.
-      isSearchTermChangedBeforeSubmit: false
+      isSearchTermChangedBeforeSubmit: false,
+      error: null
     };
   }
 
@@ -82,7 +83,7 @@ class App extends Component {
       axios
         .get(url)
         .then(res => this._isMounted && this.setCharacters(res.data.data))
-        .catch(() => {});
+        .catch(error => this.setState({ error }));
     }
   };
 
@@ -96,7 +97,7 @@ class App extends Component {
     axios
       .get(url)
       .then(res => this._isMounted && this.setCharacters(res.data.data))
-      .catch(() => {});
+      .catch(error => this.setState({ error }));
   };
 
   setCharacters = res => {
@@ -173,13 +174,25 @@ class App extends Component {
       pers,
       limit,
       allTogether,
-      isSearchTermChangedBeforeSubmit
+      isSearchTermChangedBeforeSubmit,
+      error
     } = this.state;
     let list;
     let charactersOffset;
     let pages;
     let total;
     let btnCssClasses;
+
+    if (error) {
+      return (
+        <div className={styles.cError}>
+          Something went wrong, sorry...
+          <span role="img" aria-label="Got ill face">
+            🤒
+          </span>
+        </div>
+      );
+    }
 
     // handle variables when search name inputed.
     if (searchTerm) {
