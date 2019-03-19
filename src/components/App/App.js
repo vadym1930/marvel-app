@@ -9,12 +9,14 @@ import { Hero } from "../Hero/Hero";
 import styles from "../../shared/app.scss";
 import u from "../../shared/utils.scss";
 
-const PARAM_NAME_STARTS_WITH = "nameStartsWith=";
-const PARAM_API_KEY = "apikey=";
-const PARAM_LIMIT = "limit=";
-const PARAM_OFFSET = "offset=";
-const BASE_URL = "//gateway.marvel.com/v1/public/characters";
-const API_KEY = process.env.PUBLIC_KEY;
+import {
+  PARAM_NAME_STARTS_WITH,
+  PARAM_API_KEY,
+  PARAM_LIMIT,
+  PARAM_OFFSET,
+  BASE_URL,
+  API_KEY
+} from "../../shared/constants";
 
 class App extends Component {
   constructor(props) {
@@ -80,13 +82,13 @@ class App extends Component {
       axios
         .get(url)
         .then(res => this._isMounted && this.setCharacters(res.data.data))
-        .catch(err => console.log(err));
+        .catch(() => {});
     }
   };
 
   fetchPersByStartName = (offset = 0) => {
     const { searchTerm, limit } = this.state;
-    console.log("here");
+
     this.setState({ isLoaded: false, isSearchTermChangedBeforeSubmit: true });
 
     const url = `${BASE_URL}?${PARAM_NAME_STARTS_WITH}${searchTerm}&${PARAM_LIMIT}${limit}&${PARAM_OFFSET}${offset}&${PARAM_API_KEY}${API_KEY}`;
@@ -94,7 +96,7 @@ class App extends Component {
     axios
       .get(url)
       .then(res => this._isMounted && this.setCharacters(res.data.data))
-      .catch(err => console.log(err));
+      .catch(() => {});
   };
 
   setCharacters = res => {
@@ -170,7 +172,6 @@ class App extends Component {
       all,
       pers,
       limit,
-      isEmpty,
       allTogether,
       isSearchTermChangedBeforeSubmit
     } = this.state;
