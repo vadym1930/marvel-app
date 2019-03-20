@@ -5,9 +5,12 @@ import { FooterContent } from "../FooterContent/FooterContent";
 import { Search } from "../Search/Search";
 import "normalize.css";
 import { Pagination } from "../Pagination/Pagination";
-import { Hero } from "../Hero/Hero";
 import styles from "../../shared/app.scss";
 import u from "../../shared/utils.scss";
+import { Message } from "./Message";
+import { More } from "./More";
+import { withTwoComponents } from "./withTwoComponents";
+import { Results } from "./Results";
 
 import {
   PARAM_NAME_STARTS_WITH,
@@ -17,6 +20,9 @@ import {
   BASE_URL,
   API_KEY
 } from "../../shared/constants";
+
+const MoreWithPagination = withTwoComponents(More, Pagination);
+const MessageWithResults = withTwoComponents(Results, Message);
 
 class App extends Component {
   constructor(props) {
@@ -183,16 +189,14 @@ class App extends Component {
     let total;
     let btnCssClasses;
 
-    if (error) {
+    if (error)
       return (
-        <div className={styles.cError}>
-          Something went wrong, sorry...
-          <span role="img" aria-label="Got ill face">
-            🤒
-          </span>
-        </div>
+        <Message
+          label="Something went wrong, sorry..."
+          emoji="🤒"
+          msg="Something went wrong, sorry..."
+        />
       );
-    }
 
     // handle variables when search name inputed.
     if (searchTerm) {
@@ -261,41 +265,29 @@ class App extends Component {
           <div className={styles.oContainer}>
             <div className={styles.cMain__inner}>
               <div className={styles.cMain__results}>
-                {isLoaded
-                  ? list.map(item => <Hero key={item.id} item={item} />)
-                  : "loading..."}
-                {/* {isEmpty && isSearchTermChangedBeforeSubmit ? "Nothing" : ""} */}
+                <MessageWithResults
+                  flag={isLoaded}
+                  msg="Loading"
+                  emoji="👀"
+                  label="loading"
+                  list={list}
+                />
               </div>
-              {searchTerm ? (
-                <div className={styles.cMain__more}>
-                  <button
-                    className={btnCssClasses.join(" ")}
-                    onClick={() =>
-                      this.fetchPersByStartName(charactersOffset + 5)
-                    }
-                  >
-                    loaded {list.length}
-                    {total - list.length > 0
-                      ? `, but ${total - list.length} left -> load more`
-                      : ", nothing to load more"}
-                  </button>
-                </div>
-              ) : (
-                <div className={styles.cMain__pagination}>
-                  <Pagination
-                    pages={pages}
-                    limit={limit}
-                    charactersOffset={charactersOffset}
-                    total={total}
-                    fetchCharacters={this.fetchCharacters}
-                    list={all && all}
-                  />
-                </div>
-              )}
+              <MoreWithPagination
+                flag={searchTerm}
+                btnCssClasses={btnCssClasses}
+                fetchPersByStartName={this.fetchPersByStartName}
+                limit={limit}
+                list={list}
+                pages={pages}
+                total={total}
+                charactersOffset={charactersOffset}
+                fetchCharacters={this.fetchCharacters}
+                collection={all && all}
+              />
             </div>
           </div>
         </main>
-
         <footer>
           <div className={styles.oContainer}>
             <FooterContent>

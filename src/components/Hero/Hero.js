@@ -25,7 +25,7 @@ export const Hero = props => (
         <div className={styles.cItem__description}>
           {props.item.description
             ? props.item.description
-            : "No decription provided by API. See more via link below"}
+            : "No description provided by API. See more via link below"}
         </div>
 
         <div className={styles.cItem__more}>
