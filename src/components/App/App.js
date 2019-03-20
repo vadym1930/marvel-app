@@ -119,6 +119,7 @@ class App extends Component {
     const { all, pers, searchTerm } = this.state;
 
     if (searchTerm) {
+      // search case
       const oldHits = (pers && pers[searchTerm] && pers[searchTerm].hits) || [];
 
       const updatedList = [...results, ...oldHits];
@@ -136,6 +137,7 @@ class App extends Component {
         isLoaded: true
       });
     } else {
+      // pagination case
       const oldPages = (all && all) || {};
       const newPage = {
         [page]: {
@@ -171,6 +173,45 @@ class App extends Component {
     });
   };
 
+  defineEssentialsVarsForSearch = (source, term) => {
+    const list =
+      (source && source[term] && source[term] && source[term].hits) || [];
+    const charactersOffset =
+      (source &&
+        source[term] &&
+        source[term] &&
+        source[term].charactersOffset) ||
+      0;
+    const pages =
+      (source && source[term] && source[term] && source[term].pages) || null;
+    const total =
+      (source && source[term] && source[term] && source[term].total) || null;
+
+    return {
+      list,
+      charactersOffset,
+      pages,
+      total
+    };
+  };
+
+  defineEssentialsVars = (source, askedPage) => {
+    const list = (source && source[askedPage] && source[askedPage].list) || [];
+    const charactersOffset =
+      (source[askedPage] && source[askedPage].charactersOffset) || 0;
+    const pages =
+      (source && source[askedPage] && source[askedPage].pages) || null;
+    const total =
+      (source && source[askedPage] && source[askedPage].total) || null;
+
+    return {
+      list,
+      charactersOffset,
+      pages,
+      total
+    };
+  };
+
   render() {
     const {
       isLoaded,
@@ -183,10 +224,7 @@ class App extends Component {
       isSearchTermChangedBeforeSubmit,
       error
     } = this.state;
-    let list;
-    let charactersOffset;
-    let pages;
-    let total;
+    let essentialVariables = {};
     let btnCssClasses;
 
     if (error)
@@ -200,51 +238,24 @@ class App extends Component {
 
     // handle variables when search name inputed.
     if (searchTerm) {
-      list =
-        (pers &&
-          pers[searchTerm] &&
-          pers[searchTerm] &&
-          pers[searchTerm].hits) ||
-        [];
-      charactersOffset =
-        (pers &&
-          pers[searchTerm] &&
-          pers[searchTerm] &&
-          pers[searchTerm].charactersOffset) ||
-        0;
-      pages =
-        (pers &&
-          pers[searchTerm] &&
-          pers[searchTerm] &&
-          pers[searchTerm].pages) ||
-        null;
-      total =
-        (pers &&
-          pers[searchTerm] &&
-          pers[searchTerm] &&
-          pers[searchTerm].total) ||
-        null;
+      essentialVariables = this.defineEssentialsVarsForSearch(pers, searchTerm);
 
       // add btn classes depending on the state changing.
       btnCssClasses = [`${styles.cBtn}`, `${styles.cMain__more}`];
       if (!isLoaded) {
         btnCssClasses.push(u.isHidden);
       }
-      if (!isSearchTermChangedBeforeSubmit && !list.length) {
+      if (!isSearchTermChangedBeforeSubmit && !essentialVariables.list.length) {
         btnCssClasses.push(u.isHidden);
       }
-      if (total <= list.length) {
+      if (essentialVariables.total <= essentialVariables.list.length) {
         btnCssClasses.push(u.isDisabled);
       } else {
         btnCssClasses.push(u.isBlack);
       }
       // handle scenarion when going throught pages.
     } else {
-      list = (all && all[askedPage] && all[askedPage].list) || [];
-      charactersOffset =
-        (all[askedPage] && all[askedPage].charactersOffset) || 0;
-      pages = (all && all[askedPage] && all[askedPage].pages) || null;
-      total = (all && all[askedPage] && all[askedPage].total) || null;
+      essentialVariables = this.defineEssentialsVars(all, askedPage);
     }
 
     return (
@@ -270,18 +281,18 @@ class App extends Component {
                   msg="Loading"
                   emoji="👀"
                   label="loading"
-                  list={list}
+                  list={essentialVariables.list}
                 />
               </div>
               <MoreWithPagination
+                list={essentialVariables.list}
+                charactersOffset={essentialVariables.charactersOffset}
+                pages={essentialVariables.pages}
+                total={essentialVariables.total}
                 flag={searchTerm}
                 btnCssClasses={btnCssClasses}
                 fetchPersByStartName={this.fetchPersByStartName}
                 limit={limit}
-                list={list}
-                pages={pages}
-                total={total}
-                charactersOffset={charactersOffset}
                 fetchCharacters={this.fetchCharacters}
                 collection={all && all}
               />
