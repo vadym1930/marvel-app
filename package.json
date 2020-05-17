@@ -12,6 +12,7 @@
     "heroku-postbuild": "npm run build"
   },
   "devDependencies": {
+    "autoprefixer": "^9.8.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -31,8 +32,8 @@
     "sass": "^1.16.1"
   },
   "engines": {
-    "node": ">= 10.16.0",
-    "npm": ">= 6.9.0"
+    "node": "10.16.0",
+    "npm": "6.9.0"
   },
   "dependencies": {
     "axios": "^0.18.1",
