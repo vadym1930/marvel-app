@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "axios": "^0.18.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "normalize.css": "^8.0.1",
     "react": "^16.0.0",
     "react-dom": "^16.8.2"
